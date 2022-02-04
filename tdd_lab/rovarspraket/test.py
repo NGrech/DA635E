@@ -1,5 +1,5 @@
-from asyncio.windows_events import NULL
 import unittest
+from parameterized import parameterized
 from unittest import result
 
 from rovar import rovar
@@ -36,8 +36,18 @@ class TestRovar(unittest.TestCase):
         result = rov.derove(data)
         self.assertEqual(result, "")
 
-
-# TODO: Lower case constants test
+    @parameterized.expand([
+        ('b','bob'),('c','coc'),('d','dod'),('f','fof'),
+        ('g','gog'),('h','hoh'),('j','joj'),('k','kok'),
+        ('l','lol'),('m','mom'),('n','non'),('p','pop'),
+        ('q','qoq'),('s','sos'),('t','tot'),('v','vov'),
+        ('w','wow'),('x','xox'),('y','yoy'),('z','zoz'),
+    ])
+    def test_lower_case_constants_encode(self, data, expected):
+        # Lower case constants test
+        rov = rovar.Rovar()
+        result = rov.enrove(data)
+        self.assertEqual(result, expected)
 
 # TODO: Upper case constants test 
 
@@ -48,6 +58,10 @@ class TestRovar(unittest.TestCase):
 # TODO: Number tests
 
 # TODO: Symbols test
+
+# TODO: White space test 
+
+# TODO: Non empty string test 
 
 if __name__ == '__main__':
     unittest.main()
