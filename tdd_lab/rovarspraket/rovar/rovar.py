@@ -3,7 +3,7 @@
 from asyncio.windows_events import NULL
 
 
-class rovar(object):
+class Rovar(object):
 
     _LOWER_CONSTANTS = "bcdfhjklmnpqrstvwxz"
     _UPPER_CONSTANTS = "BCFGHJKLMNPQRSTVWXZ"
