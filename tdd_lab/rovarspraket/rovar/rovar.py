@@ -1,7 +1,5 @@
 # Rövarspråke module
 
-from asyncio.windows_events import NULL
-
 
 class Rovar(object):
 
@@ -48,12 +46,3 @@ class Rovar(object):
             rov = rov.replace(find, c)
 
         return rov
-
-if __name__ =='__main__':
-    print('Dumb tst')
-    msg = 'hello world'
-    rv = rovar()
-    encoded = rv.enrove(msg)
-    print(encoded)
-    decoded = rv.derove(encoded)
-    print(decoded)
