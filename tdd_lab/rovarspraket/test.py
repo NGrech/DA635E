@@ -1,7 +1,9 @@
+#from typing_extensions import Self
 import unittest
 from parameterized import parameterized
 from unittest import result
 import copy
+import string
 
 from rovar import rovar
 
@@ -17,6 +19,8 @@ class TestRovar(unittest.TestCase):
         ('w','wow'),('x','xox'),('y','yoy'),('z','zoz'),
     ]
     VOWELS = ['a', 'e', 'i', 'o', 'u', 'ö', 'å', 'ä']
+    VOWELS_CAP = ['A', 'E', 'I', 'O', 'U', 'Ö', 'Å', 'Ä']
+    NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
     def test_null_input_encode(self):
         # Test null input case
@@ -60,7 +64,6 @@ class TestRovar(unittest.TestCase):
         result = rov.derove(data)
         self.assertEqual(result, expected)
 
-# TODO: Lower case vowel tests 
     @parameterized.expand(VOWELS)
     def test_lower_case_vowels_encode(self,data):
         # lower case vowel encode test
@@ -69,9 +72,45 @@ class TestRovar(unittest.TestCase):
         result = rov.enrove(data)
         self.assertEqual(result, expected)
 
-# TODO: Upper case vowel tests 
+    @parameterized.expand(VOWELS)
+    def test_lower_case_vowels_decode(self,data):
+        # lower case vowel decode test
+        expected = copy.copy(data)
+        rov = rovar.Rovar()
+        result = rov.derove(data)
+        self.assertEqual(result, expected)
 
-# TODO: Number tests
+    @parameterized.expand(VOWELS_CAP)
+    def test_upper_case_vowels_encode(self,data):
+        # upper case vowel encode test
+        expected = copy.copy(data)
+        rov = rovar.Rovar()
+        result = rov.enrove(data)
+        self.assertEqual(result, expected)
+
+    @parameterized.expand(VOWELS_CAP)
+    def test_upper_case_vowels_decode(self,data):
+        # upper case vowel decode test
+        expected = copy.copy(data)
+        rov = rovar.Rovar()
+        result = rov.derove(data)
+        self.assertEqual(result, expected)
+
+    @parameterized.expand(NUMBERS)
+    def test_numbers_encode(self,data):
+        # numbers encode test
+        expected = copy.copy(data)
+        rov = rovar.Rovar()
+        result = rov.enrove(data)
+        self.assertEqual(result, expected)
+
+    @parameterized.expand(NUMBERS)
+    def test_numbers_decode(self,data):
+        # numbers decode test
+        expected = copy.copy(data)
+        rov = rovar.Rovar()
+        result = rov.derove(data)
+        self.assertEqual(result, expected)
 
 # TODO: Symbols test
 
