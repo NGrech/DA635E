@@ -12,7 +12,7 @@ from rovar import rovar
 
 class TestRovar(unittest.TestCase):
 
-    CONSTANTS = [
+    CONSONANT = [
         ('b','bob'),('c','coc'),('d','dod'),('f','fof'),
         ('g','gog'),('h','hoh'),('j','joj'),('k','kok'),
         ('l','lol'),('m','mom'),('n','non'),('p','pop'),
@@ -53,16 +53,34 @@ class TestRovar(unittest.TestCase):
         result = rov.derove(data)
         self.assertEqual(result, "")
 
-    @parameterized.expand(CONSTANTS)
-    def test_lower_case_constants_encode(self, data, expected):
-        # Lower case constants encode test
+    @parameterized.expand(CONSONANT)
+    def test_lower_case_consonants_encode(self, data, expected):
+        # Lower case consonants encode test
         rov = rovar.Rovar()
         result = rov.enrove(data)
         self.assertEqual(result, expected)
 
-    @parameterized.expand(CONSTANTS)
-    def test_lower_case_constants_decode(self, expected, data):
-        # Lower case constants decode test
+    @parameterized.expand(CONSONANT)
+    def test_lower_case_consonants_decode(self, expected, data):
+        # Lower case consonants decode test
+        rov = rovar.Rovar()
+        result = rov.derove(data)
+        self.assertEqual(result, expected)
+
+    @parameterized.expand(CONSONANT)
+    def test_upper_case_consonants_encode(self, data, expected):
+        # Upper case consonants encode test
+        data = data.upper()
+        expected = expected.upper()
+        rov = rovar.Rovar()
+        result = rov.enrove(data)
+        self.assertEqual(result, expected)
+
+    @parameterized.expand(CONSONANT)
+    def test_upper_case_consonants_decode(self, expected, data):
+        # Upper case consonants decode test
+        data = data.upper()
+        expected = expected.upper()
         rov = rovar.Rovar()
         result = rov.derove(data)
         self.assertEqual(result, expected)
