@@ -67,6 +67,10 @@ class TestRovar(unittest.TestCase):
         result = rov.derove(data)
         self.assertEqual(result, expected)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9099dfba44a5feddb870024053d47044fc57d8e4
     @parameterized.expand(VOWELS)
     def test_lower_case_vowels_encode(self,data):
         # lower case vowel encode test
@@ -107,6 +111,7 @@ class TestRovar(unittest.TestCase):
         result = rov.enrove(data)
         self.assertEqual(result, expected)
 
+<<<<<<< HEAD
     @parameterized.expand(NUMBERS)
     def test_numbers_decode(self,data):
         # numbers decode test
@@ -119,10 +124,18 @@ class TestRovar(unittest.TestCase):
     def test_symbols_encode(self,data):
         # symbols encode test
         expected = copy.copy(data)
+=======
+    def test_pangram_encode(self):
+        # test encoding of a pangram
+        data = 'FAQ om Schweiz: Klöv du trång pjäxby?'
+        expected = 'FoFAQoQ omom SoScochohwoweizoz: KoKlolövov dodu totrorånongog popjojäxoxboby?'
+
+>>>>>>> 9099dfba44a5feddb870024053d47044fc57d8e4
         rov = rovar.Rovar()
         result = rov.enrove(data)
         self.assertEqual(result, expected)
 
+<<<<<<< HEAD
     @parameterized.expand(SYMBOLS)
     def test_symbols_decode(self,data):
         # symbols decode test
@@ -143,6 +156,13 @@ class TestRovar(unittest.TestCase):
     def test_whitespace_decode(self,data):
         # whitespace decode test
         expected = copy.copy(data)
+=======
+    def test_pangram_decode(self):
+        # test encoding of a pangram
+        data = 'FoFAQoQ omom SoScochohwoweizoz: KoKlolövov dodu totrorånongog popjojäxoxboby?'
+        expected = 'FAQ om Schweiz: Klöv du trång pjäxby?'
+
+>>>>>>> 9099dfba44a5feddb870024053d47044fc57d8e4
         rov = rovar.Rovar()
         result = rov.derove(data)
         self.assertEqual(result, expected)
