@@ -147,7 +147,5 @@ class TestRovar(unittest.TestCase):
         result = rov.derove(data)
         self.assertEqual(result, expected)
 
-# TODO: Non empty string test 
-
 if __name__ == '__main__':
     unittest.main()
