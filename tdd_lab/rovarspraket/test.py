@@ -60,7 +60,7 @@ class TestRovar(unittest.TestCase):
         result = rov.derove(data)
         self.assertEqual(result, expected)
 
-# TODO: Lower case vowel tests 
+
     @parameterized.expand(VOWELS)
     def test_lower_case_vowels_encode(self,data):
         # lower case vowel encode test
@@ -77,7 +77,23 @@ class TestRovar(unittest.TestCase):
 
 # TODO: White space test 
 
-# TODO: Non empty string test 
+    def test_pangram_encode(self):
+        # test encoding of a pangram
+        data = 'FAQ om Schweiz: Klöv du trång pjäxby?'
+        expected = 'FoFAQoQ omom SoScochohwoweizoz: KoKlolövov dodu totrorånongog popjojäxoxboby?'
+
+        rov = rovar.Rovar()
+        result = rov.enrove(data)
+        self.assertEqual(result, expected)
+
+    def test_pangram_decode(self):
+        # test encoding of a pangram
+        data = 'FoFAQoQ omom SoScochohwoweizoz: KoKlolövov dodu totrorånongog popjojäxoxboby?'
+        expected = 'FAQ om Schweiz: Klöv du trång pjäxby?'
+
+        rov = rovar.Rovar()
+        result = rov.derove(data)
+        self.assertEqual(result, expected)
 
 if __name__ == '__main__':
     unittest.main()
