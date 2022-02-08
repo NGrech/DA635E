@@ -17,10 +17,11 @@ class TestRovar(unittest.TestCase):
         ('g','gog'),('h','hoh'),('j','joj'),('k','kok'),
         ('l','lol'),('m','mom'),('n','non'),('p','pop'),
         ('q','qoq'),('s','sos'),('t','tot'),('v','vov'),
-        ('w','wow'),('x','xox'),('y','yoy'),('z','zoz'),
+        ('w','wow'),('x','xox'),('z','zoz'),
     ]
-    VOWELS = ['a', 'e', 'i', 'o', 'u', 'ö', 'å', 'ä']
-    VOWELS_CAP = ['A', 'E', 'I', 'O', 'U', 'Ö', 'Å', 'Ä']
+    
+    VOWELS = ['a', 'e', 'i', 'o', 'u', 'ö', 'å', 'ä', 'y']
+    VOWELS_CAP = ['A', 'E', 'I', 'O', 'U', 'Ö', 'Å', 'Ä', 'Y']
     NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     SYMBOLS = list(string.punctuation)
     WHITESPACE = list(string.whitespace)
@@ -71,7 +72,7 @@ class TestRovar(unittest.TestCase):
     def test_upper_case_consonants_encode(self, data, expected):
         # Upper case consonants encode test
         data = data.upper()
-        expected = expected.upper()
+        expected = expected[0].upper() + expected[1] + expected[2].upper()
         rov = rovar.Rovar()
         result = rov.enrove(data)
         self.assertEqual(result, expected)
@@ -79,7 +80,7 @@ class TestRovar(unittest.TestCase):
     @parameterized.expand(CONSONANT)
     def test_upper_case_consonants_decode(self, expected, data):
         # Upper case consonants decode test
-        data = data.upper()
+        data = data[0].upper() + data[1] + data[2].upper()
         expected = expected.upper()
         rov = rovar.Rovar()
         result = rov.derove(data)
