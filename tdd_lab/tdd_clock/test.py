@@ -41,7 +41,24 @@ class TestClock(unittest.TestCase):
         clock = Clock()
         self.assertRaises(ValueError, clock.set(1,1,1))
 
-    # TODO: Test transitions from S2
+    def test_s2_change_mode(self):
+        clock = Clock()
+        clock._state = 2
+        output = clock.change_mode()
+        self.assertEqual(output, '00:00:00 1/1/2000')
+        self.assertEqual(clock._state, 1)
+
+    def test_s2_ready(self):
+        clock = Clock()
+        clock._state = 2
+        output = clock.ready()
+        self.assertEqual(output, '1/1/2000')
+        self.assertEqual(clock._state, 4)
+
+    def test_s2_set(self):
+        clock = Clock()
+        clock._state = 2
+        self.assertRaises(ValueError, clock.set(1,1,2001))
 
     def test_s3_change_mode(self):
         clock = Clock()
@@ -53,15 +70,30 @@ class TestClock(unittest.TestCase):
         clock._state = 3
         self.assertRaises(ValueError, clock.ready())
 
-    def test_s3_ready(self):
+    def test_s3_set(self):
         clock = Clock()
         clock._state = 3
         output = clock.set(1,1,1)
         self.assertEqual(output, '01:01:01')
         self.assertEqual(clock._state, 2)
 
-    # TODO: Test transitions from S4
+    def test_s4_change_mode(self):
+        clock = Clock()
+        clock._state = 4
+        self.assertRaises(ValueError, clock.change_mode())
 
+    def test_s4_ready(self):
+        clock = Clock()
+        clock._state = 4
+        self.assertRaises(ValueError, clock.ready())
+
+    def test_s4_set(self):
+        clock = Clock()
+        clock._state = 4
+        output = clock.set(1,1,2001)
+        self.assertEqual(output, '1/1/2001')
+        self.assertEqual(clock._state, 2)
+   
     # Time boundary testing 
 
     @parameterized.expand([(0,), (1,), (22,), (23,)])
@@ -110,3 +142,5 @@ class TestClock(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
