@@ -8,15 +8,19 @@ from xmlrpc.client import boolean
 
 
 class Time():
-    pass
+    _the_hour:int
+    _the_minute:int
+    _the_second:int
 
 class Date():
-    pass
+    _the_year:int
+    _the_month:int
+    _the_day:int
 
 class Clock():
     _the_time:Time
     _the_date:Date
-    _state:str
+    _state:int
 
     def __init__(self) -> None:
         self._the_time = None
@@ -29,6 +33,6 @@ class Clock():
     def ready(self) ->str:
         return None
     
-    def set(p1:int, p2:int, p3:int)-> string:
+    def set(self, p1:int, p2:int, p3:int)-> string:
         return None
         
