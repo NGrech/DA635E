@@ -1,8 +1,6 @@
 #from typing_extensions import Self
-from sre_parse import WHITESPACE
 import unittest
 from parameterized import parameterized
-from unittest import result
 import copy
 import string
 
