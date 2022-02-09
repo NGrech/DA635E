@@ -16,12 +16,12 @@ class Date():
 class Clock():
     _the_time:Time
     _the_date:Date
-    _state:boolean
+    _state:str
 
     def __init__(self) -> None:
-        self._the_time = Time()
-        self._the_date = Date()
-        self._state = 0
+        self._the_time = None
+        self._the_date = None
+        self._state = None
 
     def change_mode(self) -> str:
         return None
