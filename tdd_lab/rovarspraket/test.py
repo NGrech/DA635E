@@ -4,7 +4,7 @@ from parameterized import parameterized
 import copy
 import string
 
-from rovar import rovar
+from rovarspraket.rovar import rovar
 
 # Testing Cases 
 
