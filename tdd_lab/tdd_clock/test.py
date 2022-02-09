@@ -139,6 +139,47 @@ class TestClock(unittest.TestCase):
         self.assertRaises(ValueError, clock.set(2, 2, bound))
 
     # TODO: test boundaries for Date object
+    @parameterized.expand([(1,), (2,), (30,), (31,)])
+    def test_valid_day_boundaries(self, bound):
+        clock = Clock()
+        clock._state = 4
+        output = clock.set(bound, 3, 2002)
+        self.assertEqual(output, f'{bound}/3/2002')
+        self.assertEqual(clock._state, 2)
+
+    @parameterized.expand([(0,), (32,)])
+    def test_invalid_day_boundaries(self, bound):
+        clock = Clock()
+        clock._state = 4
+        self.assertRaises(ValueError, clock.set(bound, 3, 2002))
+
+    @parameterized.expand([(1,), (2,), (11,), (12,)])
+    def test_valid_month_boundaries(self, bound):
+        clock = Clock()
+        clock._state = 4
+        output = clock.set(bound, 3, 2002)
+        self.assertEqual(output, f'{bound}/3/2002')
+        self.assertEqual(clock._state, 2)
+
+    @parameterized.expand([(0,), (13,)])
+    def test_invalid_month_boundaries(self, bound):
+        clock = Clock()
+        clock._state = 4
+        self.assertRaises(ValueError, clock.set(bound, 3, 2002))
+
+    @parameterized.expand([(2000,), (2001,), (2099,), (2100,)])
+    def test_valid_year_boundaries(self, bound):
+        clock = Clock()
+        clock._state = 4
+        output = clock.set(bound, 3, 2002)
+        self.assertEqual(output, f'{bound}/3/2002')
+        self.assertEqual(clock._state, 2)
+
+    @parameterized.expand([(1999,), (2101,)])
+    def test_invalid_year_boundaries(self, bound):
+        clock = Clock()
+        clock._state = 4
+        self.assertRaises(ValueError, clock.set(bound, 3, 2002))
 
 if __name__ == '__main__':
     unittest.main()
