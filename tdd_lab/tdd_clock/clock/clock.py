@@ -19,8 +19,13 @@ class Time():
         self._the_minute = 0
         self._the_second = 0
     
-    def get_time_stamp(self) -> str:
+    def show_time(self) -> str:
         return f"{self._the_hour:02}:{self._the_minute:02}:{self._the_second:02}"
+
+    def set_time(self, hour:int, min:int, sec:int) -> str:
+        self._the_hour = hour
+        self._the_minute = min
+        self._the_second = sec
 
 class Date():
     _the_year:int
@@ -32,7 +37,7 @@ class Date():
         self._the_month = 1
         self._the_year = 2000
 
-    def get_date_stamp(self) -> str:
+    def show_date(self) -> str:
         return f"{self._the_day}/{self._the_month}/{self._the_year}"
 
 class Clock():
@@ -48,14 +53,20 @@ class Clock():
     def change_mode(self) -> str:
         if self._state == 1:
             self._state = 2
-        return f'{self._the_time.get_time_stamp()} {self._the_date.get_date_stamp()}'
+        return f'{self._the_time.show_time()} {self._the_date.show_date()}'
     
     def ready(self) -> str:
         if self._state == 1:
             self._state = 3
-        return self._the_time.get_time_stamp()
+        return self._the_time.show_time()
     
     def set(self, p1:int, p2:int, p3:int)-> string:
         if self._state == 1:
             raise ValueError('Can\'t set time in in time mode, ready first.')
-        
+        elif self._state == 2:
+            pass # No implementation here did not get to that test yet
+        elif self._state == 3:
+            self._the_time.set_time(p1, p2, p3)
+            self._state = 1
+            _display = self._the_time.show_time()
+        return _display
