@@ -39,7 +39,8 @@ class TestClock(unittest.TestCase):
 
     def test_s1_set(self):
         clock = Clock()
-        self.assertRaises(ValueError, clock.set(1,1,1))
+        with self.assertRaises(ValueError):
+            clock.set(1,1,1)
 
     def test_s2_change_mode(self):
         clock = Clock()

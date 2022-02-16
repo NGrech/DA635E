@@ -1,5 +1,6 @@
 # Clock module
 
+import re
 import string
 import struct
 from tkinter import NO
@@ -17,6 +18,9 @@ class Time():
         self._the_hour = 0
         self._the_minute = 0
         self._the_second = 0
+    
+    def get_time_stamp(self) -> str:
+        return f"{self._the_hour:02}:{self._the_minute:02}:{self._the_second:02}"
 
 class Date():
     _the_year:int
@@ -27,6 +31,9 @@ class Date():
         self._the_day = 1
         self._the_month = 1
         self._the_year = 2000
+
+    def get_date_stamp(self) -> str:
+        return f"{self._the_day}/{self._the_month}/{self._the_year}"
 
 class Clock():
     _the_time:Time
@@ -39,11 +46,16 @@ class Clock():
         self._state = 1
 
     def change_mode(self) -> str:
-        return None
+        if self._state == 1:
+            self._state = 2
+        return f'{self._the_time.get_time_stamp()} {self._the_date.get_date_stamp()}'
     
-    def ready(self) ->str:
-        return None
+    def ready(self) -> str:
+        if self._state == 1:
+            self._state = 3
+        return self._the_time.get_time_stamp()
     
     def set(self, p1:int, p2:int, p3:int)-> string:
-        return None
+        if self._state == 1:
+            raise ValueError('Can\'t set time in in time mode, ready first.')
         
