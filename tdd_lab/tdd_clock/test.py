@@ -59,17 +59,20 @@ class TestClock(unittest.TestCase):
     def test_s2_set(self):
         clock = Clock()
         clock._state = 2
-        self.assertRaises(ValueError, clock.set(1,1,2001))
+        with self.assertRaises(ValueError):
+            clock.set(1,1,2001)
 
     def test_s3_change_mode(self):
         clock = Clock()
         clock._state = 3
-        self.assertRaises(ValueError, clock.change_mode())
+        with self.assertRaises(ValueError):
+            clock.change_mode()
 
     def test_s3_ready(self):
         clock = Clock()
         clock._state = 3
-        self.assertRaises(ValueError, clock.ready())
+        with self.assertRaises(ValueError):
+            clock.ready()
 
     def test_s3_set(self):
         clock = Clock()
@@ -81,12 +84,14 @@ class TestClock(unittest.TestCase):
     def test_s4_change_mode(self):
         clock = Clock()
         clock._state = 4
-        self.assertRaises(ValueError, clock.change_mode())
+        with self.assertRaises(ValueError):
+            clock.change_mode()
 
     def test_s4_ready(self):
         clock = Clock()
         clock._state = 4
-        self.assertRaises(ValueError, clock.ready())
+        with self.assertRaises(ValueError):
+            clock.ready()
 
     def test_s4_set(self):
         clock = Clock()
@@ -109,7 +114,8 @@ class TestClock(unittest.TestCase):
     def test_invalid_hour_boundaries(self, bound):
         clock = Clock()
         clock._state = 3
-        self.assertRaises(ValueError, clock.set(bound, 2, 2))
+        with self.assertRaises(ValueError):
+            clock.set(bound, 2, 2)
 
     @parameterized.expand([(0,), (1,), (58,), (59,)])
     def test_valid_min_boundaries(self, bound):
@@ -123,7 +129,8 @@ class TestClock(unittest.TestCase):
     def test_invalid_min_boundaries(self, bound):
         clock = Clock()
         clock._state = 3
-        self.assertRaises(ValueError, clock.set(2, bound, 2))
+        with self.assertRaises(ValueError):
+            clock.set(2, bound, 2)
 
     @parameterized.expand([(0,), (1,), (58,), (59,)])
     def test_valid_sec_boundaries(self, bound):
@@ -134,12 +141,12 @@ class TestClock(unittest.TestCase):
         self.assertEqual(clock._state, 1)
 
     @parameterized.expand([(-1,), (60,)])
-    def test_invalid_min_boundaries(self, bound):
+    def test_invalid_sec_boundaries(self, bound):
         clock = Clock()
         clock._state = 3
-        self.assertRaises(ValueError, clock.set(2, 2, bound))
+        with self.assertRaises(ValueError):
+            clock.set(2, 2, bound)
 
-    # TODO: test boundaries for Date object
     @parameterized.expand([(1,), (2,), (30,), (31,)])
     def test_valid_day_boundaries(self, bound):
         clock = Clock()
@@ -152,7 +159,8 @@ class TestClock(unittest.TestCase):
     def test_invalid_day_boundaries(self, bound):
         clock = Clock()
         clock._state = 4
-        self.assertRaises(ValueError, clock.set(bound, 3, 2002))
+        with self.assertRaises(ValueError):
+            clock.set(bound, 3, 2002)
 
     @parameterized.expand([(1,), (2,), (11,), (12,)])
     def test_valid_month_boundaries(self, bound):
@@ -166,7 +174,8 @@ class TestClock(unittest.TestCase):
     def test_invalid_month_boundaries(self, bound):
         clock = Clock()
         clock._state = 4
-        self.assertRaises(ValueError, clock.set(bound, 3, 2002))
+        with self.assertRaises(ValueError):
+            clock.set(bound, 3, 2002)
 
     @parameterized.expand([(2000,), (2001,), (2099,), (2100,)])
     def test_valid_year_boundaries(self, bound):
@@ -180,7 +189,8 @@ class TestClock(unittest.TestCase):
     def test_invalid_year_boundaries(self, bound):
         clock = Clock()
         clock._state = 4
-        self.assertRaises(ValueError, clock.set(bound, 3, 2002))
+        with self.assertRaises(ValueError):
+            clock.set(bound, 3, 2002)
 
 if __name__ == '__main__':
     unittest.main()

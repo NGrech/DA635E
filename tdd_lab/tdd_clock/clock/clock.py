@@ -23,8 +23,14 @@ class Time():
         return f"{self._the_hour:02}:{self._the_minute:02}:{self._the_second:02}"
 
     def set_time(self, hour:int, min:int, sec:int) -> str:
+        if (hour > 23) or (hour < 0):
+            raise ValueError(f'Hour: {hour} out of range, expected range 0-23')
         self._the_hour = hour
+        if (min > 59) or (min < 0):
+            raise ValueError(f'Minute: {min} out of range, expected range 0-59')
         self._the_minute = min
+        if (sec > 59) or (sec < 0):
+            raise ValueError(f'Second: {sec} out of range, expected range 0-59')
         self._the_second = sec
 
 class Date():
