@@ -37,6 +37,17 @@ class Date():
     def show_date(self) -> str:
         return f"{self._the_day}/{self._the_month}/{self._the_year}"
 
+    def set_date(self, day:int, month:int, year:int) -> str:
+        if (day < 1) or (day > 31):
+            raise ValueError(f'Day: {day} out of range, expected range 1-31')
+        self._the_day = day
+        if (month < 1) or (month > 12):
+            raise ValueError(f'Month: {month} out of range, expected range 1-12')
+        self._the_month = month
+        if (year < 2000) or (year > 2100):
+            raise ValueError(f'Year: {year} out of range, expected range 2000-2100')
+        self._the_year = year
+
 class Clock():
     _the_time:Time
     _the_date:Date
@@ -52,15 +63,23 @@ class Clock():
             self._state = 2
         elif self._state == 2:
             self._state = 1
+        elif self._state == 3:
+            raise ValueError('Can\'t change mode when setting time.')
+        elif self._state == 4:
+            raise ValueError('Can\'t change time when setting date.')
         return f'{self._the_time.show_time()} {self._the_date.show_date()}'
     
     def ready(self) -> str:
         if self._state == 1:
             self._state = 3
             output = self._the_time.show_time()
-        if self._state == 2:
+        elif self._state == 2:
             self._state = 4
             output = self._the_date.show_date()
+        elif self._state == 3:
+            raise ValueError('Already in time ready mode.')
+        elif self._state == 4:
+            raise ValueError('Already in date ready mode.')
         return output
     
     def set(self, p1:int, p2:int, p3:int)-> str:
@@ -72,4 +91,8 @@ class Clock():
             self._the_time.set_time(p1, p2, p3)
             self._state = 1
             _display = self._the_time.show_time()
+        elif self._state == 4:
+            self._the_date.set_date(p1, p2, p3)
+            self._state = 2
+            _display = self._the_date.show_date()
         return _display
