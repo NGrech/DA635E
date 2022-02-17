@@ -1,14 +1,5 @@
 # Clock module
 
-import re
-import string
-import struct
-from tkinter import NO
-from tkinter.messagebox import RETRY
-from xml.dom.expatbuilder import theDOMImplementation
-from xmlrpc.client import boolean
-
-
 class Time():
     _the_hour:int
     _the_minute:int
@@ -66,7 +57,7 @@ class Clock():
             self._state = 3
         return self._the_time.show_time()
     
-    def set(self, p1:int, p2:int, p3:int)-> string:
+    def set(self, p1:int, p2:int, p3:int)-> str:
         if self._state == 1:
             raise ValueError('Can\'t set time in in time mode, ready first.')
         elif self._state == 2:
