@@ -50,18 +50,24 @@ class Clock():
     def change_mode(self) -> str:
         if self._state == 1:
             self._state = 2
+        elif self._state == 2:
+            self._state = 1
         return f'{self._the_time.show_time()} {self._the_date.show_date()}'
     
     def ready(self) -> str:
         if self._state == 1:
             self._state = 3
-        return self._the_time.show_time()
+            output = self._the_time.show_time()
+        if self._state == 2:
+            self._state = 4
+            output = self._the_date.show_date()
+        return output
     
     def set(self, p1:int, p2:int, p3:int)-> str:
         if self._state == 1:
             raise ValueError('Can\'t set time in in time mode, ready first.')
         elif self._state == 2:
-            pass # No implementation here did not get to that test yet
+            raise ValueError('Can\'t set date in in date mode, ready first.')
         elif self._state == 3:
             self._the_time.set_time(p1, p2, p3)
             self._state = 1
